@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 32% 6%;
+    --foreground: 213 28% 95%;
+    --card: 224 28% 9%;
+    --card-foreground: 213 28% 95%;
+    --muted: 224 24% 13%;
+    --muted-foreground: 217 14% 64%;
+    --border: 224 22% 17%;
+    --input: 224 22% 17%;
+    --primary: 258 90% 66%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 190 92% 55%;
+    --accent-foreground: 224 32% 6%;
+    --ring: 258 90% 66%;
+    --radius: 1rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-family: "Manrope", -apple-system, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.35);
+  color: hsl(var(--foreground));
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 999px;
+}
+
+input,
+select,
+textarea {
+  font-size: 1rem;
+}
+
+/* ---- Aurora: живые пятна за героем ---- */
+.aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.aurora-a {
+  width: 38rem;
+  height: 38rem;
+  background: radial-gradient(circle at 30% 30%, #7c3aed, transparent 70%);
+  animation: aurora-drift-a 20s ease-in-out infinite;
+}
+
+.aurora-b {
+  width: 32rem;
+  height: 32rem;
+  background: radial-gradient(circle at 70% 70%, #06b6d4, transparent 70%);
+  animation: aurora-drift-b 26s ease-in-out infinite;
+}
+
+.aurora-c {
+  width: 26rem;
+  height: 26rem;
+  background: radial-gradient(circle at 50% 50%, #db2777, transparent 70%);
+  opacity: 0.22;
+  animation: aurora-drift-a 32s ease-in-out infinite reverse;
+}
+
+@keyframes aurora-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(12vw, 8vh) scale(1.25);
+  }
+}
+
+@keyframes aurora-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate(-10vw, -8vh) scale(0.9);
+  }
+}
+
+/* ---- Тонкая сетка поверх фона ---- */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
